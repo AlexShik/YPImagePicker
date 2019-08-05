@@ -57,14 +57,14 @@ public class PanGestureHelper: NSObject, UIGestureRecognizerDelegate {
     }
     
     fileprivate func animateView() {
-        UIView.animate(withDuration: 0.2,
-                       delay: 0.0,
-                       options: [.curveEaseInOut, .beginFromCurrentState],
-                       animations: {
-                        self.v.refreshImageCurtainAlpha()
-                        self.v.layoutIfNeeded()
-        }
-            ,
+        UIView.animate(
+            withDuration: 0.2,
+            delay: 0.0,
+            options: [.curveEaseInOut, .beginFromCurrentState],
+            animations: {
+                self.v.refreshImageCurtainAlpha()
+                self.v.layoutIfNeeded()
+            },
                        completion: nil)
     }
     

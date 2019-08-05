@@ -13,6 +13,7 @@ protocol YPBottomPagerDelegate: class {
     func pagerScrollViewDidScroll(_ scrollView: UIScrollView)
     func pagerDidSelectController(_ vc: UIViewController)
 }
+
 open class YPBottomPager: UIViewController, UIScrollViewDelegate {
     
     weak var delegate: YPBottomPagerDelegate?

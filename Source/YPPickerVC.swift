@@ -28,6 +28,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
     /// Private callbacks to YPImagePicker
     public var didClose:(() -> Void)?
     public var didSelectItems: (([YPMediaItem]) -> Void)?
+    public var didSelectAssets: (([PHAsset]) -> Void)?
     
     enum Mode {
         case library
@@ -308,14 +309,20 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         
         if mode == .library {
             libraryVC.doAfterPermissionCheck { [weak self] in
-                libraryVC.selectedMedia(photoCallback: { photo in
-                    self?.didSelectItems?([YPMediaItem.photo(p: photo)])
-                }, videoCallback: { video in
-                    self?.didSelectItems?([YPMediaItem
-                        .video(v: video)])
-                }, multipleItemsCallback: { items in
-                    self?.didSelectItems?(items)
-                })
+                libraryVC.selectedAssets {
+                    self?.didSelectAssets?($0)
+                }
+                
+//                libraryVC.selectedMedia(
+//                    photoCallback: { photo in
+//                        self?.didSelectItems?([YPMediaItem.photo(p: photo)])
+//                    },
+//                    videoCallback: { video in
+//                        self?.didSelectItems?([YPMediaItem.video(v: video)])
+//                    }, multipleItemsCallback: { items in
+//                        self?.didSelectItems?(items)
+//                    }
+//                )
             }
         }
     }

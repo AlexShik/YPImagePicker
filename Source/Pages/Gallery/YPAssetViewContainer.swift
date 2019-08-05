@@ -17,13 +17,13 @@ class YPAssetViewContainer: UIView {
     public let grid = YPGridView()
     public let curtain = UIView()
     public let spinnerView = UIView()
-    public let squareCropButton = UIButton()
+//    public let squareCropButton = UIButton()
     public let multipleSelectionButton = UIButton()
     public var onlySquare = YPConfig.library.onlySquare
     public var isShown = true
     
     private let spinner = UIActivityIndicatorView(style: .white)
-    private var shouldCropToSquare = true
+    private var shouldCropToSquare = false
     private var isMultipleSelection = false
 
     override func awakeFromNib() {
@@ -66,48 +66,49 @@ class YPAssetViewContainer: UIView {
         curtain.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         curtain.alpha = 0
         
-        if !onlySquare {
-            // Crop Button
-            squareCropButton.setImage(YPConfig.icons.cropIcon, for: .normal)
-            sv(squareCropButton)
-            squareCropButton.size(42)
-            |-15-squareCropButton
-            squareCropButton.Bottom == zoomableView!.Bottom - 15
-        }
+        zoomableView?.fitImage(true, animated: true)
+        
+//        if !onlySquare {
+//            // Crop Button
+//            squareCropButton.setImage(YPConfig.icons.cropIcon, for: .normal)
+//            sv(squareCropButton)
+//            squareCropButton.size(42)
+//            |-15-squareCropButton
+//            squareCropButton.Bottom == zoomableView!.Bottom - 15
+//        }
         
         // Multiple selection button
-        sv(multipleSelectionButton)
-        multipleSelectionButton.size(42)
-        multipleSelectionButton-15-|
-        multipleSelectionButton.setImage(YPConfig.icons.multipleSelectionOffIcon, for: .normal)
-        multipleSelectionButton.Bottom == zoomableView!.Bottom - 15
+//        sv(multipleSelectionButton)
+//        multipleSelectionButton.size(42)
+//        multipleSelectionButton-15-|
+//        multipleSelectionButton.setImage(YPConfig.icons.multipleSelectionOffIcon, for: .normal)
+//        multipleSelectionButton.Bottom == zoomableView!.Bottom - 15
         
     }
     
     // MARK: - Square button
 
-    @objc public func squareCropButtonTapped() {
-        if let zoomableView = zoomableView {
-            let z = zoomableView.zoomScale
-            shouldCropToSquare = (z >= 1 && z < zoomableView.squaredZoomScale)
-        }
-        zoomableView?.fitImage(shouldCropToSquare, animated: true)
-    }
+//    @objc public func squareCropButtonTapped() {
+//        if let zoomableView = zoomableView {
+//            let z = zoomableView.zoomScale
+//            shouldCropToSquare = (z >= 1 && z < zoomableView.squaredZoomScale)
+//        }
+//        zoomableView?.fitImage(shouldCropToSquare, animated: true)
+//    }
     
-    
-    public func refreshSquareCropButton() {
-        if onlySquare {
-            squareCropButton.isHidden = true
-        } else {
-            if let image = zoomableView?.assetImageView.image {
-                let isImageASquare = image.size.width == image.size.height
-                squareCropButton.isHidden = isImageASquare
-            }
-        }
-        
-        let shouldFit = YPConfig.library.onlySquare ? true : shouldCropToSquare
-        zoomableView?.fitImage(shouldFit)
-    }
+//    public func refreshSquareCropButton() {
+//        if onlySquare {
+//            squareCropButton.isHidden = true
+//        } else {
+//            if let image = zoomableView?.assetImageView.image {
+//                let isImageASquare = image.size.width == image.size.height
+//                squareCropButton.isHidden = isImageASquare
+//            }
+//        }
+//
+//        let shouldFit = YPConfig.library.onlySquare ? true : shouldCropToSquare
+//        zoomableView?.fitImage(shouldFit)
+//    }
     
     // MARK: - Multiple selection
 
@@ -116,7 +117,7 @@ class YPAssetViewContainer: UIView {
         isMultipleSelection = on
         let image = on ? YPConfig.icons.multipleSelectionOnIcon : YPConfig.icons.multipleSelectionOffIcon
         multipleSelectionButton.setImage(image, for: .normal)
-        refreshSquareCropButton()
+//        refreshSquareCropButton()
     }
 }
 

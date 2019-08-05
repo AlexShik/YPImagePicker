@@ -165,7 +165,6 @@ extension YPLibraryVC: UICollectionViewDelegate {
         v.refreshImageCurtainAlpha()
 
         if multipleSelectionEnabled {
-            
             let cellIsInTheSelectionPool = isInSelectionPool(indexPath: indexPath)
             let cellIsCurrentlySelected = previouslySelectedIndexPath.row == currentlySelectedIndex
 

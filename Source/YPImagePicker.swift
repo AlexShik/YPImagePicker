@@ -15,6 +15,7 @@ public protocol YPImagePickerDelegate: AnyObject {
 }
 
 open class YPImagePicker: UINavigationController {
+    public var didSelect: (([PHAsset], Bool) -> Void)?
     
     private var _didFinishPicking: (([YPMediaItem], Bool) -> Void)?
     public func didFinishPicking(completion: @escaping (_ items: [YPMediaItem], _ cancelled: Bool) -> Void) {
@@ -53,21 +54,32 @@ open class YPImagePicker: UINavigationController {
         fatalError("init(coder:) has not been implemented")
     }
     
-override open func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
+    
         picker.didClose = { [weak self] in
-            self?._didFinishPicking?([], true)
+            self?.didSelect?([], true)
+//            self?._didFinishPicking?([], true)
         }
+    
         viewControllers = [picker]
         setupLoadingView()
         navigationBar.isTranslucent = false
+        
+        picker.didSelectAssets = { [weak self] assets in
+            self?.didSelect?(assets, false)
+        }
+    
+//        picker.didSelectAssets = {
 
         picker.didSelectItems = { [weak self] items in
             // Use Fade transition instead of default push animation
+            
             let transition = CATransition()
             transition.duration = 0.3
-            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-            transition.type = CATransitionType.fade
+            transition.timingFunction = .init(name: .easeInEaseOut)
+            transition.type = .fade
+            
             self?.view.layer.add(transition, forKey: nil)
             
             // Multiple items flow

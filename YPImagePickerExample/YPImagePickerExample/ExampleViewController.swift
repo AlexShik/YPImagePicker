@@ -80,7 +80,15 @@ class ExampleViewController: UIViewController {
         // config.targetImageSize = .cappedTo(size: 1024)
 
         /* Choose what media types are available in the library. Defaults to `.photo` */
-        config.library.mediaType = .photoAndVideo
+//        config.library.mediaType = .photoAndVideo
+        config.library.mediaType = .photo
+        
+        config.library.skipSelectionsGallery = true
+        
+//        config.showsPhotoFilters = false
+        
+//        config.colors.coverSelectorBorderColor = UIColor.yellow
+//        config.colors.multipleItemsSelectedCircleColor = .yellow
 
         /* Enables selecting the front camera by default, useful for avatars. Defaults to false */
         // config.usesFrontCamera = true
@@ -111,7 +119,7 @@ class ExampleViewController: UIViewController {
 
         /* Defines which screens are shown at launch, and their order.
            Default value is `[.library, .photo]` */
-        config.screens = [.library, .photo, .video]
+        config.screens = [.library]
         
         /* Can forbid the items with very big height with this property */
 //        config.library.minWidthForItem = UIScreen.main.bounds.width * 0.8
@@ -126,6 +134,11 @@ class ExampleViewController: UIViewController {
 
         /* Adds a Crop step in the photo taking process, after filters. Defaults to .none */
         config.showsCrop = .rectangle(ratio: (16/9))
+        
+        config.colors.multipleItemsSelectedCircleColor = .orange
+        
+        config.showsCrop = .none
+        config.showsPhotoFilters = false
 
         /* Defines the overlay view for the camera. Defaults to UIView(). */
         // let overlayView = UIView()
@@ -140,9 +153,9 @@ class ExampleViewController: UIViewController {
         config.hidesStatusBar = false
 
         /* Defines if the bottom bar should be hidden when showing the picker. Default is false */
-        config.hidesBottomBar = false
+        config.hidesBottomBar = true
 
-        config.library.maxNumberOfItems = 5
+        config.library.maxNumberOfItems = 200
         
         /* Disable scroll to change between mode */
         // config.isScrollToChangeModesEnabled = false
@@ -173,8 +186,18 @@ class ExampleViewController: UIViewController {
 
         /* Change configuration directly */
         // YPImagePickerConfiguration.shared.wordings.libraryTitle = "Gallery2"
-        
 
+        picker.didSelect = { [weak self] assets, cancelled in
+            guard !cancelled else {
+                print("LOG: Cancelled!")
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            
+            print("LOG: Picked \(assets.count) photos!")
+        }
+        
+        
         /* Multiple media implementation */
         picker.didFinishPicking { [unowned picker] items, cancelled in
             
