@@ -136,6 +136,7 @@ class ExampleViewController: UIViewController {
         config.showsCrop = .rectangle(ratio: (16/9))
         
         config.colors.multipleItemsSelectedCircleColor = .orange
+        config.colors.navBarBackground = .red
         
         config.showsCrop = .none
         config.showsPhotoFilters = false
@@ -156,6 +157,9 @@ class ExampleViewController: UIViewController {
         config.hidesBottomBar = true
 
         config.library.maxNumberOfItems = 200
+        
+        config.colors.tintColor = .white
+        config.colors.multipleItemsSelectedCircleColor = .orange
         
         /* Disable scroll to change between mode */
         // config.isScrollToChangeModesEnabled = false

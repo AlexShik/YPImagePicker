@@ -11,6 +11,9 @@ import UIKit
 public struct YPColors {
     
    // MARK: - Common
+    
+//    public var navBarBackground: UIColor = .white
+    public var navBarBackground: UIColor = .red
 
     /// The common tint color which is used for done buttons in navigation bar, multiple items selection and so on.
     public var tintColor = UIColor(r: 10, g: 120, b: 254)

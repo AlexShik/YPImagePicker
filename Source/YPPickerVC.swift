@@ -299,6 +299,7 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         if let libraryVC = libraryVC {
             libraryVC.mediaManager.forseCancelExporting()
         }
+        
         self.didClose?()
     }
     

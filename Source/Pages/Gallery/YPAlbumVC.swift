@@ -35,10 +35,18 @@ class YPAlbumVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.cancel,
-                                                           style: .plain,
-                                                           target: self,
-                                                           action: #selector(close))
+        
+        navigationItem.leftBarButtonItem = .init(
+            title: YPConfig.wordings.cancel,
+            style: .plain,
+            target: self,
+            action: #selector(close)
+        )
+        
+        let navBarBackground = YPImagePickerConfiguration.shared.colors.navBarBackground
+        navigationController?.navigationBar.barTintColor = navBarBackground
+        navigationController?.navigationBar.isTranslucent = false
+        
         setUpTableView()
         fetchAlbumsInBackground()
     }
