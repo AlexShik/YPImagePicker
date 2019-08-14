@@ -18,7 +18,7 @@ class YPMultipleSelectionIndicator: UIView {
     convenience init() {
         self.init(frame: .zero)
         
-        let size: CGFloat = 20
+        let size: CGFloat = 22
         
         sv(
             circle,
@@ -32,7 +32,7 @@ class YPMultipleSelectionIndicator: UIView {
         circle.layer.cornerRadius = size / 2.0
         label.textAlignment = .center
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
         
         set(number: nil)
     }
